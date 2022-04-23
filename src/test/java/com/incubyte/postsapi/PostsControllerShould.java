@@ -12,14 +12,14 @@ class PostsControllerShould {
 
   @Test
   void get_all_posts() {
-    postsController.getAll().block();
+    postsController.getAll();
     verify(postsService).getAll();
   }
 
   @Test
   void get_post_by_id() {
     Integer id = 1;
-    postsController.getById(id).block();
+    postsController.getById(id);
     verify(postsService).getById(id);
   }
 }
