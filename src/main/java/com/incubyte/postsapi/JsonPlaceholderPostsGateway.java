@@ -4,16 +4,25 @@ import java.util.List;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 import reactor.core.publisher.Mono;
 
 @Component
 public class JsonPlaceholderPostsGateway {
-  public Mono<List<Post>> getAllPosts() {
+  ResponseSpec getWebClient(String url) {
     return CommonWebClientFactory.getCommonWebClient()
         .get()
-        .uri("/posts")
+        .uri(url)
         .accept(MediaType.APPLICATION_JSON)
-        .retrieve()
-        .bodyToMono(new ParameterizedTypeReference<>() {});
+        .retrieve();
+  }
+
+  public Mono<List<Post>> getAll() {
+    return getWebClient("/posts").bodyToMono(new ParameterizedTypeReference<>() {});
+  }
+
+  public Mono<Post> getById(Integer id) {
+    String url = String.format("/posts/%d", id);
+    return getWebClient(url).bodyToMono(Post.class);
   }
 }

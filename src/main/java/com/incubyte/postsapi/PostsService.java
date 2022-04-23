@@ -14,7 +14,11 @@ public class PostsService {
     this.jsonPlaceholderPostsGateway = jsonPlaceholderPostsGateway;
   }
 
-  public Mono<List<Post>> getAllPosts() {
-    return jsonPlaceholderPostsGateway.getAllPosts();
+  public Mono<List<Post>> getAll() {
+    return jsonPlaceholderPostsGateway.getAll();
+  }
+
+  public Mono<Post> getById(Integer id) {
+    return jsonPlaceholderPostsGateway.getById(id);
   }
 }

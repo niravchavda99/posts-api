@@ -25,4 +25,14 @@ class PostsApiApplicationTests {
         .expectStatus()
         .isOk();
   }
+
+  @Test
+  void get_post_by_id() {
+    webTestClient
+        .get()
+        .uri(uriBuilder -> uriBuilder.path("/posts/1").build())
+        .exchange()
+        .expectStatus()
+        .isOk();
+  }
 }
