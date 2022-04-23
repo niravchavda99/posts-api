@@ -8,13 +8,13 @@ import java.util.List;
 @Service
 public class PostsService {
 
-  private final JsonPlaceholderGateway jsonPlaceholderGateway;
+  private final JsonPlaceholderPostsGateway jsonPlaceholderPostsGateway;
 
-  public PostsService(JsonPlaceholderGateway jsonPlaceholderGateway) {
-    this.jsonPlaceholderGateway = jsonPlaceholderGateway;
+  public PostsService(JsonPlaceholderPostsGateway jsonPlaceholderPostsGateway) {
+    this.jsonPlaceholderPostsGateway = jsonPlaceholderPostsGateway;
   }
 
   public Mono<List<Post>> getAllPosts() {
-    return jsonPlaceholderGateway.getAllPosts();
+    return jsonPlaceholderPostsGateway.getAllPosts();
   }
 }
