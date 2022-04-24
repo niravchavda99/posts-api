@@ -35,4 +35,14 @@ class PostsApiApplicationTests {
         .expectStatus()
         .isOk();
   }
+
+  @Test
+  void get_comments_for_post() {
+    webTestClient
+        .get()
+        .uri(uriBuilder -> uriBuilder.path("/posts/1/comments").build())
+        .exchange()
+        .expectStatus()
+        .isOk();
+  }
 }

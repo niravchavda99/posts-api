@@ -25,4 +25,9 @@ public class JsonPlaceholderPostsGateway {
     String url = String.format("/posts/%d", id);
     return getWebClient(url).bodyToMono(Post.class);
   }
+
+  public Mono<List<Comment>> getCommentsForPostById(Integer id) {
+    String url = String.format("/posts/%d/comments", id);
+    return getWebClient(url).bodyToMono(new ParameterizedTypeReference<>() {});
+  }
 }

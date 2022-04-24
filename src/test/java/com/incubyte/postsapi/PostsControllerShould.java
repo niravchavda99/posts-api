@@ -22,4 +22,11 @@ class PostsControllerShould {
     postsController.getById(id);
     verify(postsService).getById(id);
   }
+
+  @Test
+  void get_comments_for_post() {
+    Integer id = 1;
+    postsController.getCommentsForPostById(id);
+    verify(postsService).getCommentsForPostById(id);
+  }
 }

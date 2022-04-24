@@ -21,4 +21,8 @@ public class PostsService {
   public Mono<Post> getById(Integer id) {
     return jsonPlaceholderPostsGateway.getById(id);
   }
+
+  public Mono<List<Comment>> getCommentsForPostById(Integer id) {
+    return jsonPlaceholderPostsGateway.getCommentsForPostById(id);
+  }
 }

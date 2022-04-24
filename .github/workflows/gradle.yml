@@ -21,8 +21,3 @@ jobs:
           files: build/test-results/**/*.xml
       - name: Build with gradle
         run: ./gradlew build
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: posts-0.1-all.jar
-          path: build/libs/posts-api-0.1-all.jar

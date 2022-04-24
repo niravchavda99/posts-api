@@ -20,6 +20,19 @@ class PostsServiceShould {
   public void init() {
     when(jsonPlaceholderPostsGateway.getAll()).thenReturn(Mono.just(getFakePosts()));
     when(jsonPlaceholderPostsGateway.getById(1)).thenReturn(Mono.just(getFakePost()));
+    when(jsonPlaceholderPostsGateway.getCommentsForPostById(1))
+        .thenReturn(Mono.just(getFakeComments()));
+  }
+
+  private List<Comment> getFakeComments() {
+    Comment comment1 = new Comment();
+    comment1.setId(1);
+    comment1.setPostId(1);
+    comment1.setName("Fake Comment 1");
+    comment1.setEmail("Fake Email");
+    comment1.setBody("Fake Comment Body");
+
+    return List.of(comment1);
   }
 
   private List<Post> getFakePosts() {
@@ -64,5 +77,20 @@ class PostsServiceShould {
     PostsService postsService = new PostsService(jsonPlaceholderPostsGateway);
     postsService.getById(1).block();
     verify(jsonPlaceholderPostsGateway).getById(1);
+  }
+
+  @Test
+  void get_comments_for_post() {
+    PostsService postsService = new PostsService(jsonPlaceholderPostsGateway);
+    List<Comment> comments = postsService.getCommentsForPostById(1).block();
+    verify(jsonPlaceholderPostsGateway).getCommentsForPostById(1);
+
+    Assertions.assertNotNull(comments);
+    assertThat(comments).hasSizeGreaterThan(0);
+    assertThat(comments.get(0).getId()).isEqualTo(1);
+    assertThat(comments.get(0).getPostId()).isEqualTo(1);
+    assertThat(comments.get(0).getName()).isEqualTo("Fake Comment 1");
+    assertThat(comments.get(0).getEmail()).isEqualTo("Fake Email");
+    assertThat(comments.get(0).getBody()).isEqualTo("Fake Comment Body");
   }
 }

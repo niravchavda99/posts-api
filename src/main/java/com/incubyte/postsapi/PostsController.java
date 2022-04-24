@@ -18,6 +18,11 @@ public class PostsController {
     this.postsService = postsService;
   }
 
+  @GetMapping("/posts/{id}/comments")
+  public Mono<List<Comment>> getCommentsForPostById(@PathVariable("id") Integer id) {
+    return postsService.getCommentsForPostById(id);
+  }
+
   @GetMapping("/posts/{id}")
   public Mono<Post> getById(@PathVariable("id") Integer id) {
     return postsService.getById(id);
